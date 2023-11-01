@@ -50,5 +50,8 @@ public class Jugador {
     public void restarFicha() {
         cantFichas--;
     }
+    public int Puntuacion() {
+        return cantFichas;
+    }
     
 }

@@ -11,13 +11,16 @@ package otelo;
 public class Fichas {
     
     private Jugador propietario;
+    private Colores color;
 
     public Jugador getPropietario() {
         return propietario;
     }
 
-    public Fichas(Jugador propietario) {
+    public Fichas(Jugador propietario, Colores color) {
         this.propietario = propietario;
+        this.color = color;
+        
     }
 
     public void setPropietario(Jugador propietario) {
