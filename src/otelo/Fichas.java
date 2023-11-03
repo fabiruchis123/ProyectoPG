@@ -8,19 +8,17 @@ package otelo;
  *
  * @author UTN
  */
-public class Fichas {
+public class Fichas extends Jugador {
     
     private Jugador propietario;
     private Colores color;
 
-    public Jugador getPropietario() {
-        return propietario;
+    public Fichas(String nombre, Colores colores, int cantFichas) {
+        super(nombre, colores, cantFichas);
     }
 
-    public Fichas(Jugador propietario, Colores color) {
-        this.propietario = propietario;
-        this.color = color;
-        
+    public Jugador getPropietario() {
+        return propietario;
     }
 
     public void setPropietario(Jugador propietario) {

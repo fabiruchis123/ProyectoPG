@@ -6,6 +6,7 @@ package otelo;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -37,10 +38,10 @@ public class Juego {
      
     public void inicializarTablero() {
     int centro = tablero.getTamano() / 2;
-    tablero.colocarFicha(centro - 1, centro - 1, jugador1, Colores.BLANCO);
-    tablero.colocarFicha(centro, centro, jugador1, Colores.BLANCO);
-    tablero.colocarFicha(centro - 1, centro, jugador2, Colores.MORADO);
-    tablero.colocarFicha(centro, centro - 1, jugador2, Colores.MORADO);
+    tablero.colocarFicha(centro - 1, centro - 1, jugador1, Colores.BLANCO,"Chiky");
+    tablero.colocarFicha(centro, centro, jugador1, Colores.BLANCO,"Chiky");
+    tablero.colocarFicha(centro - 1, centro, jugador2, Colores.MORADO,"Carlos");
+    tablero.colocarFicha(centro, centro - 1, jugador2, Colores.MORADO,"Carlos");
 }
     
     private void evaluarFicha(int fila, int columna, Jugador jugador, int direccionFila, int direccionColumna) {
@@ -70,7 +71,7 @@ public class Juego {
     
     public void realizarMovimiento(int fila, int columna, Colores color) {
     if (movimientoValido(fila, columna)) {
-        tablero.colocarFicha(fila, columna, jugadorActual, color);
+        tablero.colocarFicha(fila, columna, jugadorActual, color,"");
         realizarMovimiento(fila, columna, color);
         int puntuacionJugador1 = jugador1.Puntuacion();
         int puntuacionJugador2 = jugador2.Puntuacion();
@@ -78,14 +79,14 @@ public class Juego {
     }
 }
     private boolean movimientoValido(int fila, int columna) {
-    if (fila < 1 || fila >= 12 || columna < 1 || columna >= 12) {
-        return false;
+    if (fila < 0 || fila >= 12 || columna < 0 || columna >= 12) {
+        return false; // Movimiento no válido
     }
-    
+
     Fichas fichaActual = tablero.obtenerFichas(fila, columna);
-    
+
     if (fichaActual != null) {
-        return false;
+        return false; // Movimiento no válido
     }
     return movimientoValido(fila - 1, columna - 1) ||
            movimientoValido(fila - 1, columna) ||
@@ -104,25 +105,55 @@ public class Juego {
         ArrayList<Point> resultado = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
-                if (puedeJugar(tablero, jugador, i, j)) {
+                if (VerificarSipuedeJugar(tablero, jugador, i, j)) {
                     resultado.add(new Point(i, j));
                 }
             }
         }
         return resultado;
     }
-       public static int obtenerTotalFichas(int[][] tablero) {
-        int c = 0;
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 12; j++) {
-                if (tablero[i][j] != 0) {
-                    c++;
-                }
-            }
-        }
-        return c;
+     public static boolean VerificarSipuedeJugar(int[][] tablero, int jugador, int i, int j) {
+    if (tablero[i][j] != 0) {
+        return false;
     }
-       
+    
+    int oponente = ((jugador == 1) ? 2 : 1);
+  
+    int[][] direcciones = {
+        {-1, 0}, {1, 0},  
+        {0, -1}, {0, 1},    
+        {-1, -1}, {-1, 1},   
+        {1, -1}, {1, 1},  
+        {0, -2}, {0, 2},     
+        {2, 0}, {-2, 0}      
+    };
+    
+    for (int[] direccion : direcciones) {
+        int Cr = direccion[0];
+        int Jc = direccion[1];
+        if (SipuedeJugarr(tablero, jugador, i, j, Cr, Jc, oponente)) {
+            return true;
+        }
+    }
+    
+    return false;
+ }
+  
+   private static boolean SipuedeJugarr(int[][] tablero, int jugador, int i, int j, int Cr, int Jc, int oponente) {
+    int mi = i + Cr;
+    int mj = j + Jc;
+    int c = 0;
+    
+    while (mi >= 0 && mi < 12 && mj >= 0 && mj < 12 && tablero[mi][mj] == oponente) {
+        mi += Cr;
+        mj += Jc;
+        c++;
+    }
+    if (mi >= 0 && mi < 12 && mj >= 0 && mj < 12 && tablero[mi][mj] == jugador && c > 0) {
+        return true;
+    }
+    return false;
+   }
      public static ArrayList<Point> fichasReversibles(int[][] tablero, int jugador, int i, int j) {
      ArrayList<Point> fichasReversibles = new ArrayList<>();
      int oponente = (jugador == 1) ? 2 : 1;
@@ -157,48 +188,7 @@ public class Juego {
 
     return fichasReversibles;
 }
-         
-    public static boolean puedeJugar(int[][] tablero, int jugador, int i, int j) {
-    if (tablero[i][j] != 0) {
-        return false;
-    }
-    
-    int oponente = ((jugador == 1) ? 2 : 1);
-  
-    int[][] direcciones = {
-        {-1, 0}, {1, 0},  
-        {0, -1}, {0, 1},    
-        {-1, -1}, {-1, 1},   
-        {1, -1}, {1, 1},  
-        {0, -2}, {0, 2},     
-        {2, 0}, {-2, 0}      
-    };
-    
-    for (int[] direccion : direcciones) {
-        int Cr = direccion[0];
-        int Jc = direccion[1];
-        if (puedeJugarr(tablero, jugador, i, j, Cr, Jc, oponente)) {
-            return true;
-        }
-    }
-    
-    return false;
- }
-    private static boolean puedeJugarr(int[][] tablero, int jugador, int i, int j, int Cr, int Jc, int oponente) {
-    int mi = i + Cr;
-    int mj = j + Jc;
-    int c = 0;
-    
-    while (mi >= 0 && mi < 12 && mj >= 0 && mj < 12 && tablero[mi][mj] == oponente) {
-        mi += Cr;
-        mj += Jc;
-        c++;
-    }
-    if (mi >= 0 && mi < 12 && mj >= 0 && mj < 12 && tablero[mi][mj] == jugador && c > 0) {
-        return true;
-    }
-    return false;
-   }
+     
     public static int[][] TableroDespuesDeMovimientos(int[][] tablero, Point movimiento, int jugador) {
         int[][] nuevoTablero = new int[12][12];
         for (int k = 0; k < 12; k++) {
@@ -208,14 +198,14 @@ public class Juego {
         }
         nuevoTablero[movimiento.x][movimiento.y] = jugador;
 
-        ArrayList<Point> puntosReversibles = fichasReversibles(nuevoTablero, jugador, movimiento.x, movimiento.y);
-        for (Point punto : puntosReversibles) {
+        ArrayList<Point> fichasReversibles = fichasReversibles(nuevoTablero, jugador, movimiento.x, movimiento.y);
+        for (Point punto : fichasReversibles) {
             nuevoTablero[punto.x][punto.y] = jugador;
         }
 
         return nuevoTablero;
     }
-    public static ArrayList<Point> encontrarFichas(int[][] tablero, int jugador, int fila, int columna) {
+    public static ArrayList<Point> encontrarFichasEstables(int[][] tablero, int jugador, int fila, int columna) {
     ArrayList<Point> fichasEstables = new ArrayList<>();
     int oponente = (jugador == 1) ? 2 : 1;
 
@@ -227,13 +217,13 @@ public class Juego {
     };
 
     for (int[] direccion : direcciones) {
-    ArrayList<Point> fichasEstabless = buscarFichas(tablero, jugador, fila, columna, direccion[0], direccion[1], oponente);
+    ArrayList<Point> fichasEstabless = buscarFichasNoEstables(tablero, jugador, fila, columna, direccion[0], direccion[1], oponente);
     fichasEstables.addAll(fichasEstabless);
     }
 
     return fichasEstables;
   }
-    public static ArrayList<Point> buscarFichas(int[][] tablero, int jugador, int fila, int columna, int deltaFila, int deltaColumna, int oponente) {
+    public static ArrayList<Point> buscarFichasNoEstables(int[][] tablero, int jugador, int fila, int columna, int deltaFila, int deltaColumna, int oponente) {
     ArrayList<Point> fichasEstables = new ArrayList<>();
     int filaActual = fila + deltaFila;
     int columnaActual = columna + deltaColumna;
@@ -250,7 +240,7 @@ public class Juego {
         return new ArrayList<>(); 
     }
   }
-    public static ArrayList<Point> obtenerCasillas(int[][] tablero, int jugador) {
+    public static ArrayList<Point> obtenerCasillasVacias(int[][] tablero, int jugador) {
     ArrayList<Point> casillasFrontera = new ArrayList<>();
 
     int oponente = (jugador == 1) ? 2 : 1;
@@ -310,8 +300,30 @@ public class Juego {
     public static boolean tieneMovimientos(int[][] tablero, int jugador) {
         return MovimientosPosibles(tablero, jugador).size() > 0;
     }
-         public static boolean juegoTerminado(int[][] tablero) {
+       public static boolean juegoTerminado(int[][] tablero) {
         return !(tieneMovimientos(tablero, 1) || tieneMovimientos(tablero, 2));
     }
-         
+     public static int obtenerTotalFichas(int[][] tablero) {
+        int c = 0;
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                if (tablero[i][j] != 0) {
+                    c++;
+                }
+            }
+        }
+        return c;
+    }    
+    public void reiniciarJuego() {
+    int centro = tablero.getTamano() / 2;
+    tablero.colocarFicha(centro - 1, centro - 1, jugador1, Colores.BLANCO, "Chiky");
+    tablero.colocarFicha(centro, centro, jugador1, Colores.BLANCO,"Chiky");
+    tablero.colocarFicha(centro - 1, centro, jugador2, Colores.MORADO,"Carlos");
+    tablero.colocarFicha(centro, centro - 1, jugador2, Colores.MORADO, "Carlos");
+    
+    
+    Random random = new Random();
+    int jugadorInicial = random.nextInt(2) + 1; 
+    jugadorActual = (jugadorInicial == 1) ? jugador1 : jugador2;
+    }
 }

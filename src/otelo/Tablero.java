@@ -30,9 +30,9 @@ public class Tablero {
          
     }
     
-     public void colocarFicha(int fila, int columna, Jugador jugador, Colores color) {
+     public void colocarFicha(int fila, int columna, Jugador jugador, Colores color,String nombre) {
         if (casillas[fila][columna] == null) {
-        casillas[fila][columna] = new Fichas(jugador, color);
+        casillas[fila][columna] = new Fichas(nombre, color, fila);
     }
 }
         
