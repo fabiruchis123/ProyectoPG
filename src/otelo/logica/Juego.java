@@ -23,7 +23,7 @@ public class Juego {
     private Colores colores;
     
      public static int[][] obtenerTableroInicial() {
-        int[][] tablero = new int[12][12];
+        int[][] tablero = new int[11][11];
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
                 tablero[i][j] = 0;
@@ -97,13 +97,10 @@ public class Juego {
            movimientoValido(fila + 1, columna) ||
            movimientoValido(fila + 1, columna + 1);
 }
-    public Jugador cambiarTurno() {
-        return jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
+    private void cambiarTurno() {
+        jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
     }
     
-    public Jugador inicializarJugActual(){
-        return jugadorActual = jugador1;
-    }
 
      public static ArrayList<Point> MovimientosPosibles(int[][] tablero, int jugador) {
         ArrayList<Point> resultado = new ArrayList<>();

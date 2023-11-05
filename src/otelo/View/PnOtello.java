@@ -4,13 +4,11 @@
  */
 package otelo.View;
 
+import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import static otelo.logica.Colores.BLANCO;
 import static otelo.logica.Colores.MORADO;
-import otelo.logica.Tablero;
 import otelo.logica.Juego;
 import otelo.logica.Jugador;
 
@@ -36,6 +34,8 @@ public class PnOtello extends javax.swing.JPanel {
         Puntos();
         botones = new JButton [12][12];
         AsignarBtns();
+        iniTurno();
+        iniTablero();
         
         
         
@@ -685,7 +685,7 @@ public class PnOtello extends javax.swing.JPanel {
                             .addComponent(btn11_8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn11_9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn11_0, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1082,15 +1082,28 @@ public class PnOtello extends javax.swing.JPanel {
         
     }
     
-    public void turnoActual(){
+    public void iniTurno(){
         
-        jugActual = juego.inicializarJugActual();
+        jugActual = juga1;
         turno.setText(jugActual.getNombre());
     }
     
-    public void CambiarTurno(){
-        jugActual = juego.cambiarTurno();
-        turno.setText(jugActual.getNombre());
+    
+    public void iniTablero(){
+        juego.inicializarTablero();
+           int[][] obtenerTableroInicial = juego.obtenerTableroInicial();
+           for (int i = 0; i < 12; i++) {
+               for (int j = 0; j < 12; j++) {
+                   if (obtenerTableroInicial[i][j] == 1) {
+                       this.botones[i][j].setBackground(Color.getHSBColor(300, 100, 50));
+                   }else if (obtenerTableroInicial[i][j]== 2) {
+                       this.botones[i][j].setBackground(Color.getHSBColor(0, 0, 100));
+                   }else{
+                       this.botones[i][j].setEnabled(false);
+                       this.botones[i][j].setBackground(Color.LIGHT_GRAY);
+                   }
+               }
+        }
     }
 
     public void AsignarBtns(){
