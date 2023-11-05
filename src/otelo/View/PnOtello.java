@@ -233,6 +233,11 @@ public class PnOtello extends javax.swing.JPanel {
         btn0_8.setEnabled(false);
 
         btn1_0.setEnabled(false);
+        btn1_0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn1_0ActionPerformed(evt);
+            }
+        });
 
         btn1_1.setEnabled(false);
 
@@ -1066,6 +1071,10 @@ public class PnOtello extends javax.swing.JPanel {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_btnReiniciarActionPerformed
+
+    private void btn1_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1_0ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn1_0ActionPerformed
 
     public void NombresJugadores(){
         String nombr1 = JOptionPane.showInputDialog("Introduzca nombre jugador 1");
