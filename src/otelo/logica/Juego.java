@@ -23,16 +23,16 @@ public class Juego {
     private Colores colores;
     
      public static int[][] obtenerTableroInicial() {
-        int[][] tablero = new int[11][11];
+        int[][] tablero = new int[12][12];
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 12; j++) {
                 tablero[i][j] = 0;
             }
         }
-        tablero[5][5] = 2;
-        tablero[5][6] = 1;
-        tablero[6][5] = 1;
-        tablero[6][6] = 2;
+        tablero[5][5] = 1;
+        tablero[5][6] = 2;
+        tablero[6][5] = 2;
+        tablero[6][6] = 1;
         return tablero;
     }
      

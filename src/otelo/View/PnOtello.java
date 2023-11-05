@@ -5,6 +5,8 @@
 package otelo.View;
 
 import java.awt.Color;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static otelo.logica.Colores.BLANCO;
@@ -13,17 +15,24 @@ import otelo.logica.Juego;
 import otelo.logica.Jugador;
 
 /**
- *
+ 
  * @author UTN
  */
 public class PnOtello extends javax.swing.JPanel {
 
     
        private JButton [][] botones;
+       private int [][] tablero; 
         Jugador juga1 = new Jugador("",MORADO,0);
         Jugador juga2 = new Jugador("",BLANCO,0);
         Jugador jugActual;
         Juego juego = new Juego();
+        int[][] TableroInicial = juego.obtenerTableroInicial();
+        URL imageURL1 = PnOtello.class.getResource("/otelo/View/images/magenta.png");
+        URL imageURL2 = PnOtello.class.getResource("/otelo/View/images/negro.png");
+        ImageIcon icon1 = new ImageIcon(imageURL1);
+        ImageIcon icon2 = new ImageIcon(imageURL2);
+        
     /**
      * Creates new form PnOtello
      */
@@ -335,6 +344,7 @@ public class PnOtello extends javax.swing.JPanel {
 
         btn5_4.setEnabled(false);
 
+        btn5_5.setForeground(new java.awt.Color(0, 0, 0));
         btn5_5.setEnabled(false);
 
         btn5_6.setEnabled(false);
@@ -690,7 +700,7 @@ public class PnOtello extends javax.swing.JPanel {
                             .addComponent(btn11_8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn11_9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn11_0, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -998,7 +1008,7 @@ public class PnOtello extends javax.swing.JPanel {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 94, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 73, 0, 10);
         add(lblJugador1, gridBagConstraints);
 
         lblJugador2.setFont(new java.awt.Font("Serif", 3, 28)); // NOI18N
@@ -1008,7 +1018,7 @@ public class PnOtello extends javax.swing.JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 208, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(6, 150, 0, 0);
         add(lblJugador2, gridBagConstraints);
 
         lblFichas1.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
@@ -1017,7 +1027,7 @@ public class PnOtello extends javax.swing.JPanel {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(8, 4, 0, 1);
         add(lblFichas1, gridBagConstraints);
 
         lblFichas2.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
@@ -1026,7 +1036,7 @@ public class PnOtello extends javax.swing.JPanel {
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(9, 14, 0, 0);
         add(lblFichas2, gridBagConstraints);
 
         btnSalir.setText("SALIR");
@@ -1099,19 +1109,22 @@ public class PnOtello extends javax.swing.JPanel {
     
     
     public void iniTablero(){
-        juego.inicializarTablero();
-           int[][] obtenerTableroInicial = juego.obtenerTableroInicial();
+        
            for (int i = 0; i < 12; i++) {
-               for (int j = 0; j < 12; j++) {
-                   if (obtenerTableroInicial[i][j] == 1) {
-                       this.botones[i][j].setBackground(Color.getHSBColor(300, 100, 50));
-                   }else if (obtenerTableroInicial[i][j]== 2) {
-                       this.botones[i][j].setBackground(Color.getHSBColor(0, 0, 100));
-                   }else{
-                       this.botones[i][j].setEnabled(false);
-                       this.botones[i][j].setBackground(Color.LIGHT_GRAY);
+               if (i==5 || i==6) {
+                  for (int j = 0; j < 12; j++) {
+                      if (j==5 || j==6) {
+                          if (TableroInicial[i][j] == 1) {
+                       this.botones[i][j].setEnabled(true);
+                       this.botones[i][j].setIcon(icon1);
+                   }else if (TableroInicial[i][j]== 2) {
+                       this.botones[i][j].setEnabled(true);
+                       this.botones[i][j].setIcon(icon2);
                    }
+                      }
+               } 
                }
+               
         }
     }
 
