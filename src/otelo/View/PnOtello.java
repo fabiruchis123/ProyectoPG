@@ -4,17 +4,41 @@
  */
 package otelo.View;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import static otelo.logica.Colores.BLANCO;
+import static otelo.logica.Colores.MORADO;
+import otelo.logica.Tablero;
+import otelo.logica.Juego;
+import otelo.logica.Jugador;
+
 /**
  *
  * @author UTN
  */
 public class PnOtello extends javax.swing.JPanel {
 
+    
+       private JButton [][] botones;
+        Jugador juga1 = new Jugador("",MORADO,0);
+        Jugador juga2 = new Jugador("",BLANCO,0);
+        Jugador jugActual;
+        Juego juego = new Juego();
     /**
      * Creates new form PnOtello
      */
     public PnOtello() {
+        
         initComponents();
+        NombresJugadores();
+        Puntos();
+        botones = new JButton [12][12];
+        AsignarBtns();
+        
+        
+        
     }
 
     /**
@@ -25,6 +49,7 @@ public class PnOtello extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         btn0_0 = new javax.swing.JButton();
@@ -171,14 +196,307 @@ public class PnOtello extends javax.swing.JPanel {
         btn9_11 = new javax.swing.JButton();
         btn10_11 = new javax.swing.JButton();
         btn11_11 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblJugador1 = new javax.swing.JLabel();
+        lblJugador2 = new javax.swing.JLabel();
+        lblFichas1 = new javax.swing.JLabel();
+        lblFichas2 = new javax.swing.JLabel();
+        btnSalir = new javax.swing.JButton();
+        btnReiniciar = new javax.swing.JButton();
+        lbTurno = new javax.swing.JLabel();
+        turno = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+
+        btn0_0.setEnabled(false);
+
+        btn0_10.setEnabled(false);
+
+        btn0_1.setEnabled(false);
+
+        btn0_2.setEnabled(false);
+
+        btn0_3.setEnabled(false);
+
+        btn0_4.setEnabled(false);
+
+        btn0_5.setEnabled(false);
+
+        btn0_6.setEnabled(false);
+
+        btn0_7.setEnabled(false);
+
+        btn0_9.setEnabled(false);
+
+        btn0_8.setEnabled(false);
+
+        btn1_0.setEnabled(false);
+
+        btn1_1.setEnabled(false);
+
+        btn1_2.setEnabled(false);
+
+        btn1_3.setEnabled(false);
+
+        btn1_4.setEnabled(false);
+
+        btn1_5.setEnabled(false);
+
+        btn1_6.setEnabled(false);
+
+        btn1_7.setEnabled(false);
+
+        btn1_8.setEnabled(false);
+
+        btn1_9.setEnabled(false);
+
+        btn1_10.setEnabled(false);
+
+        btn2_0.setEnabled(false);
+
+        btn2_1.setEnabled(false);
+
+        btn2_2.setEnabled(false);
+
+        btn2_3.setEnabled(false);
+
+        btn2_4.setEnabled(false);
+
+        btn2_5.setEnabled(false);
+
+        btn2_6.setEnabled(false);
+
+        btn2_7.setEnabled(false);
+
+        btn2_8.setEnabled(false);
+
+        btn2_9.setEnabled(false);
+
+        btn2_10.setEnabled(false);
+
+        btn3_0.setEnabled(false);
+
+        btn3_1.setEnabled(false);
+
+        btn3_2.setEnabled(false);
+
+        btn3_3.setEnabled(false);
+
+        btn3_4.setEnabled(false);
+
+        btn3_5.setEnabled(false);
+
+        btn3_6.setEnabled(false);
+
+        btn3_7.setEnabled(false);
+
+        btn3_8.setEnabled(false);
+
+        btn3_9.setEnabled(false);
+
+        btn3_10.setEnabled(false);
+
+        btn4_0.setEnabled(false);
+
+        btn4_1.setEnabled(false);
+
+        btn4_2.setEnabled(false);
+
+        btn4_3.setEnabled(false);
+
+        btn4_4.setEnabled(false);
+
+        btn4_5.setEnabled(false);
+
+        btn4_6.setEnabled(false);
+
+        btn4_7.setEnabled(false);
+
+        btn4_8.setEnabled(false);
+
+        btn4_9.setEnabled(false);
+
+        btn4_10.setEnabled(false);
+
+        btn5_0.setEnabled(false);
+
+        btn5_1.setEnabled(false);
+
+        btn5_2.setEnabled(false);
+
+        btn5_3.setEnabled(false);
+
+        btn5_4.setEnabled(false);
+
+        btn5_5.setEnabled(false);
+
+        btn5_6.setEnabled(false);
+
+        btn5_7.setEnabled(false);
+
+        btn5_8.setEnabled(false);
+
+        btn5_9.setEnabled(false);
+
+        btn5_10.setEnabled(false);
+
+        btn6_0.setEnabled(false);
+
+        btn6_1.setEnabled(false);
+
+        btn6_2.setEnabled(false);
+
+        btn6_3.setEnabled(false);
+
+        btn6_4.setEnabled(false);
+
+        btn6_5.setEnabled(false);
+
+        btn6_6.setEnabled(false);
+
+        btn6_7.setEnabled(false);
+
+        btn6_8.setEnabled(false);
+
+        btn6_9.setEnabled(false);
+
+        btn6_10.setEnabled(false);
+
+        btn7_0.setEnabled(false);
+
+        btn7_1.setEnabled(false);
+
+        btn7_2.setEnabled(false);
+
+        btn7_3.setEnabled(false);
+
+        btn7_4.setEnabled(false);
+
+        btn7_5.setEnabled(false);
+
+        btn7_6.setEnabled(false);
+
+        btn7_7.setEnabled(false);
+
+        btn7_8.setEnabled(false);
+
+        btn7_9.setEnabled(false);
+
+        btn7_10.setEnabled(false);
+
+        btn8_0.setEnabled(false);
+
+        btn8_1.setEnabled(false);
+
+        btn8_2.setEnabled(false);
+
+        btn8_3.setEnabled(false);
+
+        btn8_4.setEnabled(false);
+
+        btn8_5.setEnabled(false);
+
+        btn8_6.setEnabled(false);
+
+        btn8_7.setEnabled(false);
+
+        btn8_8.setEnabled(false);
+
+        btn8_9.setEnabled(false);
+
+        btn8_10.setEnabled(false);
+
+        btn9_0.setEnabled(false);
+
+        btn9_1.setEnabled(false);
+
+        btn9_2.setEnabled(false);
+
+        btn9_3.setEnabled(false);
+
+        btn9_4.setEnabled(false);
+
+        btn9_5.setEnabled(false);
+
+        btn9_6.setEnabled(false);
+
+        btn9_7.setEnabled(false);
+
+        btn9_8.setEnabled(false);
+
+        btn9_9.setEnabled(false);
+
+        btn9_10.setEnabled(false);
+
+        btn10_0.setEnabled(false);
+
+        btn10_1.setEnabled(false);
+
+        btn10_2.setEnabled(false);
+
+        btn10_3.setEnabled(false);
+
+        btn10_4.setEnabled(false);
+
+        btn10_5.setEnabled(false);
+
+        btn10_6.setEnabled(false);
+
+        btn10_7.setEnabled(false);
+
+        btn10_8.setEnabled(false);
+
+        btn10_9.setEnabled(false);
+
+        btn10_10.setEnabled(false);
+
+        btn11_0.setEnabled(false);
+
+        btn11_1.setEnabled(false);
+
+        btn11_2.setEnabled(false);
+
+        btn11_3.setEnabled(false);
+
+        btn11_4.setEnabled(false);
+
+        btn11_5.setEnabled(false);
+
+        btn11_6.setEnabled(false);
+
+        btn11_7.setEnabled(false);
+
+        btn11_8.setEnabled(false);
+
+        btn11_9.setEnabled(false);
+
+        btn11_10.setEnabled(false);
+
+        btn0_11.setEnabled(false);
+
+        btn1_11.setEnabled(false);
+
+        btn2_11.setEnabled(false);
+
+        btn3_11.setEnabled(false);
+
+        btn4_11.setEnabled(false);
+
+        btn5_11.setEnabled(false);
+
+        btn6_11.setEnabled(false);
+
+        btn7_11.setEnabled(false);
+
+        btn8_11.setEnabled(false);
+
+        btn9_11.setEnabled(false);
+
+        btn10_11.setEnabled(false);
+
+        btn11_11.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -367,7 +685,7 @@ public class PnOtello extends javax.swing.JPanel {
                             .addComponent(btn11_8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn11_9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn11_0, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -660,48 +978,269 @@ public class PnOtello extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jLabel1.setText("Jugador 1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 5;
+        gridBagConstraints.ipadx = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 67, 6, 0);
+        add(jPanel1, gridBagConstraints);
 
-        jLabel2.setText("Jugador 2");
+        lblJugador1.setFont(new java.awt.Font("Serif", 3, 28)); // NOI18N
+        lblJugador1.setText("Jugador 1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 94, 0, 0);
+        add(lblJugador1, gridBagConstraints);
 
-        jLabel3.setText("#fichas");
+        lblJugador2.setFont(new java.awt.Font("Serif", 3, 28)); // NOI18N
+        lblJugador2.setText("Jugador 2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 208, 0, 0);
+        add(lblJugador2, gridBagConstraints);
 
-        jLabel4.setText("#fichas");
+        lblFichas1.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        lblFichas1.setText("#fichas");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        add(lblFichas1, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel1)
-                .addGap(59, 59, 59)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(181, 181, 181))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10347, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-        );
+        lblFichas2.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        lblFichas2.setText("#fichas");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 0, 0);
+        add(lblFichas2, gridBagConstraints);
+
+        btnSalir.setText("SALIR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 17, 0, 17);
+        add(btnSalir, gridBagConstraints);
+
+        btnReiniciar.setText("REINICIAR");
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 11, 0, 10);
+        add(btnReiniciar, gridBagConstraints);
+
+        lbTurno.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        lbTurno.setText("Turno de:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 450, 0);
+        add(lbTurno, gridBagConstraints);
+
+        turno.setFont(new java.awt.Font("Serif", 3, 28)); // NOI18N
+        turno.setText("turno");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 350, 0);
+        add(turno, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnReiniciarActionPerformed
+
+    public void NombresJugadores(){
+        String nombr1 = JOptionPane.showInputDialog("Introduzca nombre jugador 1");
+        juga1.setNombre(nombr1);
+        lblJugador1.setText(juga1.getNombre());
+        String nombre2 = JOptionPane.showInputDialog("Introduzca nombre jugador 2");
+        juga2.setNombre(nombre2);
+        lblJugador2.setText(juga2.getNombre());
+    }
+    
+    public void Puntos(){
+        lblFichas1.setText(Integer.toString(juga1.Puntuacion()));
+        lblFichas2.setText(Integer.toString(juga2.Puntuacion()));
+        
+    }
+    
+    public void turnoActual(){
+        
+        jugActual = juego.inicializarJugActual();
+        turno.setText(jugActual.getNombre());
+    }
+    
+    public void CambiarTurno(){
+        jugActual = juego.cambiarTurno();
+        turno.setText(jugActual.getNombre());
+    }
+
+    public void AsignarBtns(){
+        this.botones [0][0] = btn0_0;
+        this.botones [0][1] = btn0_1;
+        this.botones [0][2] = btn0_2;
+        this.botones [0][3] = btn0_3;
+        this.botones [0][4] = btn0_4;
+        this.botones [0][5] = btn0_5;
+        this.botones [0][6] = btn0_6;
+        this.botones [0][7] = btn0_7;
+        this.botones [0][8] = btn0_8;
+        this.botones [0][9] = btn0_9;
+        this.botones [0][10] = btn0_10;
+        this.botones [0][11] = btn0_11;
+        this.botones [1][0] = btn1_0;
+        this.botones [1][1] = btn1_1;
+        this.botones [1][2] = btn1_2;
+        this.botones [1][3] = btn1_3;
+        this.botones [1][4] = btn1_4;
+        this.botones [1][5] = btn1_5;
+        this.botones [1][6] = btn1_6;
+        this.botones [1][7] = btn1_7;
+        this.botones [1][8] = btn1_8;
+        this.botones [1][9] = btn1_9;
+        this.botones [1][10] = btn1_10;
+        this.botones [1][11] = btn1_11;
+        this.botones [2][0] = btn2_0;
+        this.botones [2][1] = btn2_1;
+        this.botones [2][2] = btn2_2;
+        this.botones [2][3] = btn2_3;
+        this.botones [2][4] = btn2_4;
+        this.botones [2][5] = btn2_5;
+        this.botones [2][6] = btn2_6;
+        this.botones [2][7] = btn2_7;
+        this.botones [2][8] = btn2_8;
+        this.botones [2][9] = btn2_9;
+        this.botones [2][10] = btn2_10;
+        this.botones [2][11] = btn2_11;
+        this.botones [3][0] = btn3_0;
+        this.botones [3][1] = btn3_1;
+        this.botones [3][2] = btn3_2;
+        this.botones [3][3] = btn3_3;
+        this.botones [3][4] = btn3_4;
+        this.botones [3][5] = btn3_5;
+        this.botones [3][6] = btn3_6;
+        this.botones [3][7] = btn3_7;
+        this.botones [3][8] = btn3_8;
+        this.botones [3][9] = btn3_9;
+        this.botones [3][10] = btn3_10;
+        this.botones [3][11] = btn3_11;
+        this.botones [4][0] = btn4_0;
+        this.botones [4][1] = btn4_1;
+        this.botones [4][2] = btn4_2;
+        this.botones [4][3] = btn4_3;
+        this.botones [4][4] = btn4_4;
+        this.botones [4][5] = btn4_5;
+        this.botones [4][6] = btn4_6;
+        this.botones [4][7] = btn4_7;
+        this.botones [4][8] = btn4_8;
+        this.botones [4][9] = btn4_9;
+        this.botones [4][10] = btn4_10;
+        this.botones [4][11] = btn4_11;
+        this.botones [5][0] = btn5_0;
+        this.botones [5][1] = btn5_1;
+        this.botones [5][2] = btn5_2;
+        this.botones [5][3] = btn5_3;
+        this.botones [5][4] = btn5_4;
+        this.botones [5][5] = btn5_5;
+        this.botones [5][6] = btn5_6;
+        this.botones [5][7] = btn5_7;
+        this.botones [5][8] = btn5_8;
+        this.botones [5][9] = btn5_9;
+        this.botones [5][10] = btn5_10;
+        this.botones [5][11] = btn5_11;
+        this.botones [6][0] = btn6_0;
+        this.botones [6][1] = btn6_1;
+        this.botones [6][2] = btn6_2;
+        this.botones [6][3] = btn6_3;
+        this.botones [6][4] = btn6_4;
+        this.botones [6][5] = btn6_5;
+        this.botones [6][6] = btn6_6;
+        this.botones [6][7] = btn6_7;
+        this.botones [6][8] = btn6_8;
+        this.botones [6][9] = btn6_9;
+        this.botones [6][10] = btn6_10;
+        this.botones [6][11] = btn6_11;
+        this.botones [7][0] = btn7_0;
+        this.botones [7][1] = btn7_1;
+        this.botones [7][2] = btn7_2;
+        this.botones [7][3] = btn7_3;
+        this.botones [7][4] = btn7_4;
+        this.botones [7][5] = btn7_5;
+        this.botones [7][6] = btn7_6;
+        this.botones [7][7] = btn7_7;
+        this.botones [7][8] = btn7_8;
+        this.botones [7][9] = btn7_9;
+        this.botones [7][10] = btn7_10;
+        this.botones [7][11] = btn7_11;
+        this.botones [8][0] = btn8_0;
+        this.botones [8][1] = btn8_1;
+        this.botones [8][2] = btn8_2;
+        this.botones [8][3] = btn8_3;
+        this.botones [8][4] = btn8_4;
+        this.botones [8][5] = btn8_5;
+        this.botones [8][6] = btn8_6;
+        this.botones [8][7] = btn8_7;
+        this.botones [8][8] = btn8_8;
+        this.botones [8][9] = btn8_9;
+        this.botones [8][10] = btn8_10;
+        this.botones [8][11] = btn8_11;
+        this.botones [9][0] = btn9_0;
+        this.botones [9][1] = btn9_1;
+        this.botones [9][2] = btn9_2;
+        this.botones [9][3] = btn9_3;
+        this.botones [9][4] = btn9_4;
+        this.botones [9][5] = btn9_5;
+        this.botones [9][6] = btn9_6;
+        this.botones [9][7] = btn9_7;
+        this.botones [9][8] = btn9_8;
+        this.botones [9][9] = btn9_9;
+        this.botones [9][10] = btn9_10;
+        this.botones [9][11] = btn9_11;
+        this.botones [10][0] = btn10_0;
+        this.botones [10][1] = btn10_1;
+        this.botones [10][2] = btn10_2;
+        this.botones [10][3] = btn10_3;
+        this.botones [10][4] = btn10_4;
+        this.botones [10][5] = btn10_5;
+        this.botones [10][6] = btn10_6;
+        this.botones [10][7] = btn10_7;
+        this.botones [10][8] = btn10_8;
+        this.botones [10][9] = btn10_9;
+        this.botones [10][10] = btn10_10;
+        this.botones [10][11] = btn10_11;
+        this.botones [11][0] = btn11_0;
+        this.botones [11][1] = btn11_1;
+        this.botones [11][2] = btn11_2;
+        this.botones [11][3] = btn11_3;
+        this.botones [11][4] = btn11_4;
+        this.botones [11][5] = btn11_5;
+        this.botones [11][6] = btn11_6;
+        this.botones [11][7] = btn11_7;
+        this.botones [11][8] = btn11_8;
+        this.botones [11][9] = btn11_9;
+        this.botones [11][10] = btn11_10;
+        this.botones [11][11] = btn11_11;
+        
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn0_0;
@@ -848,10 +1387,14 @@ public class PnOtello extends javax.swing.JPanel {
     private javax.swing.JButton btn9_7;
     private javax.swing.JButton btn9_8;
     private javax.swing.JButton btn9_9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton btnReiniciar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbTurno;
+    private javax.swing.JLabel lblFichas1;
+    private javax.swing.JLabel lblFichas2;
+    private javax.swing.JLabel lblJugador1;
+    private javax.swing.JLabel lblJugador2;
+    private javax.swing.JLabel turno;
     // End of variables declaration//GEN-END:variables
 }

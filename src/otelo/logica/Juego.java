@@ -97,8 +97,12 @@ public class Juego {
            movimientoValido(fila + 1, columna) ||
            movimientoValido(fila + 1, columna + 1);
 }
-    private void cambiarTurno() {
-        jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
+    public Jugador cambiarTurno() {
+        return jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
+    }
+    
+    public Jugador inicializarJugActual(){
+        return jugadorActual = jugador1;
     }
 
      public static ArrayList<Point> MovimientosPosibles(int[][] tablero, int jugador) {

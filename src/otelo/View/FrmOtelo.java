@@ -5,6 +5,8 @@
 package otelo.View;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import otelo.View.PnOtello;
 
 /**
  *
@@ -30,106 +32,181 @@ public class FrmOtelo extends javax.swing.JFrame implements View {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        paneMain = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtotelo = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Otelo games");
+        setBackground(new java.awt.Color(204, 204, 255));
+        setName("frame"); // NOI18N
         setSize(new java.awt.Dimension(30, 30));
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new java.awt.CardLayout());
+
+        paneMain.setBackground(new java.awt.Color(204, 204, 255));
+        paneMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        paneMain.setLayout(new java.awt.GridBagLayout());
+
+        jLabel2.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel2.setText("Estas por jugar Otelo, pero antes de iniciar te vamos a decir ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 10, 0, 0);
+        paneMain.add(jLabel2, gridBagConstraints);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/otelo/View/images/start.png"))); // NOI18N
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 1, true));
+        jButton1.setContentAreaFilled(false);
+        jButton1.setMaximumSize(new java.awt.Dimension(167, 130));
+        jButton1.setMinimumSize(new java.awt.Dimension(167, 130));
+        jButton1.setPreferredSize(new java.awt.Dimension(130, 65));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = -9;
+        gridBagConstraints.insets = new java.awt.Insets(30, 40, 29, 30);
+        paneMain.add(jButton1, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 28)); // NOI18N
         jLabel1.setText("BIENVENIDO");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 10;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
-        getContentPane().add(jLabel1, gridBagConstraints);
-
-        jButton1.setText("START");
-        jButton1.setMaximumSize(new java.awt.Dimension(100, 70));
-        jButton1.setMinimumSize(new java.awt.Dimension(100, 70));
-        jButton1.setPreferredSize(null);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.weighty = 0.2;
-        gridBagConstraints.insets = new java.awt.Insets(40, 35, 30, 40);
-        getContentPane().add(jButton1, gridBagConstraints);
-
-        jLabel2.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
-        jLabel2.setText("Estas por jugar Otelo, pero antes de iniciar te vamos a decir de que trata y como se juega.");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 11;
+        gridBagConstraints.ipady = 14;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jLabel2, gridBagConstraints);
+        paneMain.add(jLabel1, gridBagConstraints);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        txtotelo.setBackground(new java.awt.Color(147, 147, 215));
+        txtotelo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jLabel6.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
-        jLabel6.setText("El objetivo es convertir las fichas del oponente en tu color al atraparlas entre tus fichas en el tablero. ");
+        jLabel8.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        jLabel8.setText("Jugador 2 usa el color BLANCO");
 
-        jLabel7.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
-        jLabel7.setText("El videojuego de mesa Othello es una adaptación digital del clásico juego de estrategia para dos jugadores.");
+        jLabel4.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        jLabel4.setText("Jugador 1 usa el color MORADO");
 
         jLabel5.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
         jLabel5.setText("Gana el jugador con más fichas de su color al final.");
 
+        jLabel7.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        jLabel7.setText("El videojuego de mesa Othello es una adaptación");
+
+        jLabel6.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        jLabel6.setText("* El objetivo es convertir las fichas del oponente en tuyas");
+
         jLabel3.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
         jLabel3.setText("OTELO");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabel13.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel13.setText("del clásico juego de estrategia para dos jugadores.");
+
+        jLabel9.setFont(new java.awt.Font("Serif", 2, 24)); // NOI18N
+        jLabel9.setText("al atraparlas entre tus fichas en el tablero. ");
+
+        javax.swing.GroupLayout txtoteloLayout = new javax.swing.GroupLayout(txtotelo);
+        txtotelo.setLayout(txtoteloLayout);
+        txtoteloLayout.setHorizontalGroup(
+            txtoteloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtoteloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(txtoteloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(txtoteloLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3))
+                    .addGroup(txtoteloLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(txtoteloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jLabel7))))
-                .addContainerGap())
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel5)))
+                    .addGroup(txtoteloLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addGroup(txtoteloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel4))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        txtoteloLayout.setVerticalGroup(
+            txtoteloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtoteloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipady = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        getContentPane().add(jPanel1, gridBagConstraints);
+        paneMain.add(txtotelo, gridBagConstraints);
+
+        jLabel10.setFont(new java.awt.Font("Serif", 0, 24)); // NOI18N
+        jLabel10.setText("de que trata y como se juega.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(42, 10, 17, 10);
+        paneMain.add(jLabel10, gridBagConstraints);
+
+        getContentPane().add(paneMain, "main");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        paneMain.setVisible(false);
+        jButton1.setVisible(false);
+        txtotelo.setVisible(false);
+        jLabel1.setVisible(false);
+        jLabel2.setVisible(false);
+        jLabel10.setVisible(false);
+        PnOtello pane = new PnOtello();
+        this.add(pane);
+        pane.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,26 +250,31 @@ public class FrmOtelo extends javax.swing.JFrame implements View {
 
     @Override
     public void displayMsg(String msg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JOptionPane.showMessageDialog(this, msg);
     }
 
     @Override
     public void displayMax(JFrame Form) {
-        // Configurar la ventana
         setTitle("Othelo");
         setDefaultCloseOperation(Form.EXIT_ON_CLOSE);
-        setExtendedState(Form.MAXIMIZED_BOTH); // Maximizar la ventana
+        setExtendedState(Form.MAXIMIZED_BOTH);
         setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel paneMain;
+    private javax.swing.JPanel txtotelo;
     // End of variables declaration//GEN-END:variables
 }
