@@ -5,10 +5,13 @@
 package otelo.View;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import otelo.logica.Colores;
 import static otelo.logica.Colores.BLANCO;
 import static otelo.logica.Colores.MORADO;
 import otelo.logica.Juego;
@@ -219,6 +222,11 @@ public class PnOtello extends javax.swing.JPanel {
         turno = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
@@ -1082,13 +1090,46 @@ public class PnOtello extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-        // TODO add your handling code here:
+        reiniciarJuego();
         
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
     private void btn1_0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1_0ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn1_0ActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+       int a= evt.getX();
+       int B= evt.getY();
+       int fila =-1;
+       int columna =-1;
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                if (this.botones[i][j].getBounds().contains(a,B)) {
+                    fila =i;columna=j;
+                    break;
+                }
+            }
+        }
+        if (fila!=-1 && columna!=-1 && juego.movimientoValido(fila, columna)) {
+            juego.realizarMovimiento(fila, columna, MORADO);
+            ArrayList<Point> fichasAtrapa = juego.calcularFichasAtrapadas(fila, columna, MORADO);
+            
+            for (Point punto : fichasAtrapa) {
+                int x=(int)punto.getX();
+                int y=(int)punto.getY();
+                juego.realizarMovimiento(x, y, MORADO);
+                this.botones[x][y].setBackground(jugActual.getColores().getColor());
+                jugActual.agregarFicha();
+            }
+            jugActual=(jugActual==juga1)?juga2 :juga1;
+            
+            turno.setText(jugActual.getNombre());
+            
+            lblFichas1.setText(Integer.toString(juga1.Puntuacion()));
+            lblFichas2.setText(Integer.toString(juga2.Puntuacion()));
+        }
+    }//GEN-LAST:event_formMouseClicked
 
     public void NombresJugadores(){
         String nombr1 = JOptionPane.showInputDialog("Introduzca nombre jugador 1");
@@ -1136,6 +1177,38 @@ public class PnOtello extends javax.swing.JPanel {
                
         
     }
+    private void reiniciarJuego(){
+        int opcion  = JOptionPane.showConfirmDialog(this,"Desea reiniciar el juego?", "Reiniciar Juego",JOptionPane.YES_NO_OPTION);
+        if (opcion==JOptionPane.YES_NO_OPTION) {
+            juego.reiniciarJuego();
+            juga1.setCantFichas(2);
+            juga2.setCantFichas(2);
+            lblFichas1.setText("2");
+            lblFichas2.setText("2");
+            jugActual = juga1;
+            turno.setText(jugActual.getNombre());
+        
+        // Actualizar la interfaz gráfica
+            iniTablero();
+        }
+    }
+    public void reiniciarTablero() {
+    juego.inicializarTablero();
+    iniTablero();
+    }
+    public void mostrarMovimientosValidos() { 
+
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+            if (juego.movimientoValido(i, j)) {
+                this.botones[i][j].setBackground(Color.GREEN);
+            } else {
+                // Establece otro color de fondo para las celdas no válidas
+                this.botones[i][j].setBackground(Color.BLUE);
+            }
+        }
+    }
+}
 
     public void AsignarBtns(){
         this.botones [0][0] = btn0_0;

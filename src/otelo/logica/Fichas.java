@@ -12,6 +12,10 @@ public class Fichas extends Jugador {
     
     private Jugador propietario;
     private Colores color;
+    
+    public Colores getColor() {
+        return color;
+    }
 
     public Fichas(String nombre, Colores colores, int cantFichas) {
         super(nombre, colores, cantFichas);

@@ -4,11 +4,17 @@
  */
 package otelo.logica;
 
+import java.awt.Color;
+
 /**
  *
  * @author UTN
  */
 public enum Colores {
     MORADO,
-    BLANCO
+    BLANCO;
+
+    public Color getColor() {
+        return null;
+    }
 }

@@ -21,6 +21,10 @@ public class Juego {
     private int tamano;
     private Fichas[][] casillas;
     private Colores colores;
+
+    public Colores getColores() {
+        return colores;
+    }
     
      public static int[][] obtenerTableroInicial() {
         int[][] tablero = new int[12][12];
@@ -78,7 +82,7 @@ public class Juego {
         cambiarTurno();
     }
 }
-    private boolean movimientoValido(int fila, int columna) {
+    public boolean movimientoValido(int fila, int columna) {
     if (fila < 0 || fila >= 12 || columna < 0 || columna >= 12) {
         return false; // Movimiento no válido
     }
@@ -100,8 +104,42 @@ public class Juego {
     private void cambiarTurno() {
         jugadorActual = (jugadorActual == jugador1) ? jugador2 : jugador1;
     }
-    
+    public ArrayList<Point> calcularFichasAtrapadas(int fila, int columna, Colores color) {
+    ArrayList<Point> fichasAtrapadas = new ArrayList<>();
+    Fichas[][] casillas = tablero.getCasillas();  // Accede al estado actual del tablero
 
+    // Define las direcciones en las que se pueden atrapar fichas
+    int[][] direcciones = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 }, /* Agrega las demás direcciones */ };
+
+    // Itera a través de las direcciones
+    for (int[] direccion : direcciones) {
+        int dx = direccion[0];
+        int dy = direccion[1];
+        int x = fila + dx;
+        int y = columna + dy;
+
+        // Lista temporal para fichas atrapadas en esta dirección
+        ArrayList<Point> fichasAtrapadasEnDireccion = new ArrayList<>();
+
+        // Continúa mientras estemos dentro del tablero y enemigo
+        while (x >= 0 && x < tablero.getTamano() && y >= 0 && y < tablero.getTamano() && casillas[x][y] != null) {
+            if (casillas[x][y].getColor() == color) {
+                // Hemos alcanzado una ficha de nuestro color, por lo que las fichas atrapadas en esta dirección son válidas
+                fichasAtrapadas.addAll(fichasAtrapadasEnDireccion);
+                break;
+            } else {
+                // Agrega la ficha atrapada en esta dirección
+                fichasAtrapadasEnDireccion.add(new Point(x, y));
+            }
+
+            // Avanza en la dirección
+            x += dx;
+            y += dy;
+        }
+    }
+
+    return fichasAtrapadas;
+}
      public static ArrayList<Point> MovimientosPosibles(int[][] tablero, int jugador) {
         ArrayList<Point> resultado = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
