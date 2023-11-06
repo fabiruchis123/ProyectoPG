@@ -15,11 +15,21 @@ import java.util.Random;
 public class Juego {
     
     private Tablero tablero;
+
+    public Juego() {
+        this.tablero = new Tablero(12, casillas);
+        this.jugador1 = jugador1;
+        this.jugador2 = jugador2;
+        this.jugadorActual = jugadorActual;
+        this.tamano = tamano;
+        this.casillas = casillas;
+        this.colores = colores;
+    }
     private Jugador jugador1;
     private Jugador jugador2;
     private Jugador jugadorActual;
     private int tamano;
-    private Fichas[][] casillas;
+    private Fichas[][] casillas = new Fichas[12][12];
     private Colores colores;
 
     public Colores getColores() {
