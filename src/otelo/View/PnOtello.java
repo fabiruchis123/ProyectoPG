@@ -30,8 +30,12 @@ public class PnOtello extends javax.swing.JPanel {
         int[][] TableroInicial = juego.obtenerTableroInicial();
         URL imageURL1 = PnOtello.class.getResource("/otelo/View/images/magenta.png");
         URL imageURL2 = PnOtello.class.getResource("/otelo/View/images/negro.png");
+        URL imageURL3 = PnOtello.class.getResource("/otelo/View/images/blanco.png");
+        URL imageURL4 = PnOtello.class.getResource("/otelo/View/images/beige.png");
         ImageIcon icon1 = new ImageIcon(imageURL1);
         ImageIcon icon2 = new ImageIcon(imageURL2);
+        ImageIcon iconBlanco = new ImageIcon(imageURL3);
+        ImageIcon iconBeige = new ImageIcon(imageURL4);
         
     /**
      * Creates new form PnOtello
@@ -1111,21 +1115,26 @@ public class PnOtello extends javax.swing.JPanel {
     public void iniTablero(){
         
            for (int i = 0; i < 12; i++) {
-               if (i==5 || i==6) {
                   for (int j = 0; j < 12; j++) {
-                      if (j==5 || j==6) {
+                      if (i==5 || i ==6 && j==5 || j==6) {
                           if (TableroInicial[i][j] == 1) {
-                       this.botones[i][j].setEnabled(true);
-                       this.botones[i][j].setIcon(icon1);
-                   }else if (TableroInicial[i][j]== 2) {
-                       this.botones[i][j].setEnabled(true);
-                       this.botones[i][j].setIcon(icon2);
-                   }
+                                this.botones[i][j].setEnabled(true);
+                                this.botones[i][j].setIcon(icon1);
+                                continue;
+                           }else if (TableroInicial[i][j]== 2) {
+                                this.botones[i][j].setEnabled(true);
+                                this.botones[i][j].setIcon(icon2);
+                                continue;
+                        }
                       }
+                            this.botones[i][j].setIcon(iconBlanco);
+                            this.botones[i][j].setOpaque(true);
+                                        
                } 
                }
                
-        }
+               
+        
     }
 
     public void AsignarBtns(){
